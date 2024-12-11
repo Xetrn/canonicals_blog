@@ -1,17 +1,16 @@
+import './styles/index.scss';
+import styles from './styles/index.module.scss';
+
 import { createRoot } from 'react-dom/client';
 import { CSSProperties, StrictMode, useState } from 'react';
 import clsx from 'clsx';
 
 import { Article } from 'components/article';
-
 import { ArticleParamsForm } from 'components/article-params-form';
 import {
 	ArticleStateType,
 	defaultArticleState,
-} from './constants/articleProps';
-
-import './styles/index.scss';
-import styles from './styles/index.module.scss';
+} from 'src/constants/articleProps';
 
 const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);

@@ -1,13 +1,12 @@
-import clsx from 'clsx';
-
-import plane from '../../images/plane.png';
-
-import { Spacing } from '../spacing';
-import { Text } from '../text';
-
 import styles from './Article.module.scss';
 
-export type ArticleProps = {
+import clsx from 'clsx';
+
+import plane from 'src/images/plane.png';
+import { Spacing } from 'components/spacing';
+import { Text } from 'components/text';
+
+type ArticleProps = {
 	onClick: () => void;
 };
 

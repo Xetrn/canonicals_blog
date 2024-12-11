@@ -1,8 +1,7 @@
-import { ArrowButton } from '../arrow-button';
-import { Button } from '../button';
-
 import styles from './ArticleParamsForm.module.scss';
+
 import { Dispatch, FormEvent, SetStateAction, useState } from 'react';
+import clsx from 'clsx';
 
 import {
 	ArticleStateType,
@@ -14,14 +13,15 @@ import {
 	fontSizeOptions,
 	OptionType,
 } from 'src/constants/articleProps';
+import { Spacing } from 'components/spacing';
+import { Text } from 'components/text';
+import { Select } from 'components/select';
+import { Separator } from 'components/separator';
+import { RadioGroup } from 'components/radio-group';
+import { ArrowButton } from 'components/arrow-button';
+import { Button } from 'components/button';
 
-import { Spacing } from '../spacing';
-import { Text } from '../text';
-import { Select } from '../select';
-import { Separator } from '../separator';
-import { RadioGroup } from '../radio-group';
-
-export type ArticleFormProps = {
+type ArticleFormProps = {
 	isFormOpened: boolean;
 	setIsFormOpened: Dispatch<SetStateAction<boolean>>;
 	setArticleState: Dispatch<SetStateAction<ArticleStateType>>;
@@ -42,9 +42,10 @@ export const ArticleParamsForm = ({
 				onClick={() => setIsFormOpened(!isFormOpened)}
 			/>
 			<aside
-				className={`${styles.container} ${
+				className={clsx(
+					styles.container,
 					isFormOpened ? styles.container_open : ''
-				}`}>
+				)}>
 				<form
 					className={styles.form}
 					onSubmit={(event: FormEvent) => {
