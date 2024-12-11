@@ -6,10 +6,16 @@ import { Spacing } from 'components/spacing';
 import { Text } from 'components/text';
 
 import styles from './Article.module.scss';
+import { LegacyRef, SetStateAction } from 'react';
+import React from 'react';
 
-export const Article = () => {
+export type ArticleParams = {
+	setParamsOpened: React.Dispatch<SetStateAction<boolean>>
+}
+
+export const Article = ({setParamsOpened}: ArticleParams) => {
 	return (
-		<article className={clsx(styles.article)}>
+		<article className={clsx(styles.article)} onClick={() => setParamsOpened(false)}>
 			<Text as='h1' size={45} weight={800} uppercase dynamicLite>
 				Портрет Западной Швейцарии
 			</Text>
