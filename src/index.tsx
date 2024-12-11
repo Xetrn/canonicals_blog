@@ -1,38 +1,41 @@
 import { createRoot } from 'react-dom/client';
-import { StrictMode, CSSProperties } from 'react';
-import clsx from 'clsx';
-
-import { Article } from './components/article/Article';
-import { ArticleParamsForm } from './components/article-params-form/ArticleParamsForm';
-import { defaultArticleState } from './constants/articleProps';
+import { createContext, StrictMode, useContext, useState } from 'react';
 
 import './styles/index.scss';
-import styles from './styles/index.module.scss';
+import { App } from './App';
+import { IStyles, IStylesContextValue } from './types/types';
+import {
+	backgroundColors,
+	defaultArticleState,
+} from './constants/articleProps';
 
 const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
 
-const App = () => {
+export const StylesContext = createContext<IStylesContextValue>(
+	{} as IStylesContextValue
+);
+
+const StylesProvider = ({ children }: { children: React.ReactNode }) => {
+	const [stylesList, setStylesList] = useState<IStyles>({
+		fontFamilyOption: defaultArticleState.fontFamilyOption,
+		fontColor: defaultArticleState.fontColor,
+		backgroundColor: backgroundColors[4],
+		contentWidth: defaultArticleState.contentWidth,
+		fontSizeOption: defaultArticleState.fontSizeOption,
+	});
+
 	return (
-		<div
-			className={clsx(styles.main)}
-			style={
-				{
-					'--font-family': defaultArticleState.fontFamilyOption.value,
-					'--font-size': defaultArticleState.fontSizeOption.value,
-					'--font-color': defaultArticleState.fontColor.value,
-					'--container-width': defaultArticleState.contentWidth.value,
-					'--bg-color': defaultArticleState.backgroundColor.value,
-				} as CSSProperties
-			}>
-			<ArticleParamsForm />
-			<Article />
-		</div>
+		<StylesContext.Provider value={{ stylesList, setStylesList }}>
+			{children}
+		</StylesContext.Provider>
 	);
 };
 
 root.render(
 	<StrictMode>
-		<App />
+		<StylesProvider>
+			<App />
+		</StylesProvider>
 	</StrictMode>
 );
