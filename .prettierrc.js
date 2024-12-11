@@ -5,7 +5,7 @@ module.exports = {
 	jsxSingleQuote: true,
 	bracketSameLine: true,
 	printWidth: 80,
-	useTabs: true,
 	tabWidth: 2,
+	useTabs: true,
 	endOfLine: 'lf',
 };
