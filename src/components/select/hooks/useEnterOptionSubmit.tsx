@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
-import { OptionType } from 'src/constants/articleProps';
+import { useEffect, type RefObject } from 'react';
+
+import { OptionType } from '@constants/articleProps';
 
 type UseEnterOptionSubmit = {
 	onClick: (value: OptionType['value']) => void;
 	value: OptionType['value'];
-	optionRef: React.RefObject<HTMLLIElement>;
+	optionRef: RefObject<HTMLLIElement>;
 };
 
 export const useEnterOptionSubmit = ({
@@ -25,5 +26,5 @@ export const useEnterOptionSubmit = ({
 		return () => {
 			option.removeEventListener('keydown', handleEnterKeyDown);
 		};
-	}, [value, onClick]);
+	}, [value, onClick, optionRef]);
 };

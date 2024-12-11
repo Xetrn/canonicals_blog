@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
+import type { Dispatch, RefObject, SetStateAction } from 'react';
 
 type UseEnterSubmit = {
-	onChange: (isOpen: any) => void;
-	placeholderRef: React.RefObject<HTMLDivElement>;
+	onChange: Dispatch<SetStateAction<boolean>>;
+	placeholderRef: RefObject<HTMLButtonElement>;
 };
 
 export const useEnterSubmit = ({
@@ -23,5 +24,5 @@ export const useEnterSubmit = ({
 		return () => {
 			placeholderEl.removeEventListener('keydown', handleEnterKeyDown);
 		};
-	}, []);
+	}, [onChange, placeholderRef]);
 };

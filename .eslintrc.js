@@ -9,7 +9,14 @@ module.exports = {
 		react: {
 			version: 'detect',
 		},
+		"import/resolver": {
+			"typescript": {}
+		}
 	},
+	"plugins": [
+		"@typescript-eslint",
+		"import"
+	],
 	extends: [
 		'plugin:@typescript-eslint/recommended',
 		'plugin:prettier/recommended',
