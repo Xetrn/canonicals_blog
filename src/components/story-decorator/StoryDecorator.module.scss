@@ -2,7 +2,8 @@
 
 .storybookContainer {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     padding: 50px;
+	height: 100vh;
 }
