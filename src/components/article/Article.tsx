@@ -1,15 +1,18 @@
+import styles from './Article.module.scss';
+
 import clsx from 'clsx';
 
-// Сообщаем вебпаку, что этот файл использует это изображение.
 import plane from 'src/images/plane.png';
 import { Spacing } from 'components/spacing';
 import { Text } from 'components/text';
 
-import styles from './Article.module.scss';
+type ArticleProps = {
+	onClick: () => void;
+};
 
-export const Article = () => {
+export const Article = ({ onClick }: ArticleProps) => {
 	return (
-		<article className={clsx(styles.article)}>
+		<article className={clsx(styles.article)} onClick={onClick}>
 			<Text as='h1' size={45} weight={800} uppercase dynamicLite>
 				Портрет Западной Швейцарии
 			</Text>
@@ -23,8 +26,8 @@ export const Article = () => {
 			<img className={styles.image} src={plane} alt='Картинка самолета' />
 			<Spacing size={18} />
 			<Text dynamic size={18} fontStyle='italic'>
-				Фото: Hans-Peter Gauster , "Bombardier CSeries CS300 HB-JCA" © 2017 CC
-				BY-SA 2.0
+				Фото: Hans-Peter Gauster , &quot;Bombardier CSeries CS300 HB-JCA&quot; ©
+				2017 CC BY-SA 2.0
 			</Text>
 			<Spacing size={72} />
 			<Text dynamic size={18}>
@@ -46,12 +49,12 @@ export const Article = () => {
 			</Text>
 			<Spacing size={30} />
 			<Text dynamic size={18}>
-				С мая 2017 года "Бомбардье" носит имя "Швейцарская Романдия" и
-				регистрационный номер HB-JCA ; совершает в среднем 4 коммерческих полёта
-				в сутки. Его можно видеть в "Домодедово", а также в аэропортах Парижа,
-				Валенсии, Кракова, Берлина, Вены, Загреба, на Майорке, Крите и Сицилии.
-				Самолёт останется в той же ливрее, пока его не купит другая
-				авиакомпания.
+				С мая 2017 года &quot;Бомбардье&quot; носит имя &quot;Швейцарская
+				Романдия&quot; и регистрационный номер HB-JCA ; совершает в среднем 4
+				коммерческих полёта в сутки. Его можно видеть в &quot;Домодедово&quot;,
+				а также в аэропортах Парижа, Валенсии, Кракова, Берлина, Вены, Загреба,
+				на Майорке, Крите и Сицилии. Самолёт останется в той же ливрее, пока его
+				не купит другая авиакомпания.
 			</Text>
 		</article>
 	);
