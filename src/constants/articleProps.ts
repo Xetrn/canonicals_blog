@@ -1,3 +1,5 @@
+import { IStyles } from 'src/types/types';
+
 export const fontFamilyClasses = [
 	'open-sans',
 	'ubuntu',
@@ -168,7 +170,7 @@ export const fontSizeOptions: OptionType[] = [
 	{ title: '38px', value: '38px', className: 'font-size-38' },
 ];
 
-export const defaultArticleState = {
+export const defaultArticleState: IStyles = {
 	fontFamilyOption: fontFamilyOptions[0],
 	fontColor: fontColors[0],
 	backgroundColor: backgroundColors[0],
