@@ -1,10 +1,7 @@
-import clsx from 'clsx';
-
-// Сообщаем вебпаку, что этот файл использует это изображение.
-import plane from 'src/images/plane.png';
+import { clsx } from 'clsx';
 import { Spacing } from 'components/spacing';
 import { Text } from 'components/text';
-
+import plane from 'src/images/plane.png';
 import styles from './Article.module.scss';
 
 export const Article = () => {
