@@ -1,29 +1,20 @@
 import { ElementType, ReactNode } from 'react';
-import clsx from 'clsx';
-import { FontFamiliesClasses } from 'src/constants/articleProps';
+import { clsx } from 'clsx';
+
+import { FontFamiliesClasses } from '@constants/articleProps';
 
 import styles from './index.module.scss';
 
-type Text = {
-	/** Сам текст для вывода */
+type TextProps = {
 	children: ReactNode;
-	/** Тэг которым отрендерить текст */
 	as?: ElementType;
-	/** Булевая пропса, должен ли текст меняться в зависимости от конфига */
 	dynamic?: boolean;
-	/** Размер шрифта */
 	size?: 12 | 18 | 22 | 25 | 31 | 45;
-	/** Вес шрифта */
 	weight?: 400 | 800;
-	/** Стиль шрифта */
 	fontStyle?: 'italic' | 'normal';
-	/** Булевая пропса, отвечающая должен ли текст быть в верхнем регистре */
 	uppercase?: boolean;
-	/** Выравнивание текста */
 	align?: 'center' | 'left';
-	/** font-family текста */
 	family?: FontFamiliesClasses;
-	/** Булевая пропса, делает динамическим только семью шрифтов и цвет */
 	dynamicLite?: boolean;
 };
 
@@ -38,7 +29,7 @@ export const Text = ({
 	align = 'left',
 	family = 'open-sans',
 	dynamicLite = false,
-}: Text) => {
+}: TextProps) => {
 	const className = clsx(
 		styles.text,
 		styles[`size${size}`],

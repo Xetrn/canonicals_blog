@@ -14,6 +14,9 @@ export const SelectStory: Story = {
 		as: {
 			options: ['h1', 'h2', 'div', 'span'],
 			control: { type: 'select' },
+			table: {
+				defaultValue: { summary: 'h1' },
+			},
 		},
 		dynamic: {
 			control: { type: 'boolean' },
@@ -21,6 +24,10 @@ export const SelectStory: Story = {
 		size: {
 			options: [12, 18, 22, 25, 31, 45],
 			control: { type: 'select' },
+			table: {
+				defaultValue: { summary: '18' },
+				type: { summary: 'number' },
+			},
 		},
 		weight: {
 			options: [400, 800],

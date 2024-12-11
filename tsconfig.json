@@ -22,9 +22,10 @@
 		"baseUrl": "./",
 		// Важно держать конфиг элиасов тут в соответствии с конфигом элиасов в вебпаке (webpack.common.js - resolve.alias) и с конфигом сторибука (.storybook/main.ts - webpackFinal)
 		"paths": {
-			"src/*": ["src/*"],
-			"fonts/*": ["src/fonts/*"],
-			"components/*": ["src/components/*"]
+			"@images/*": ["src/images/*"],
+			"@constants/*": ["src/constants/*"],
+			"@fonts/*": ["src/fonts/*"],
+			"@components/*": ["src/components/*"]
 		}
 	},
 	"outDir": "./dist/",
