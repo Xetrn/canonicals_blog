@@ -1,15 +1,16 @@
-import { useState, useRef } from 'react';
-import type { MouseEventHandler } from 'react';
 import clsx from 'clsx';
-import { OptionType } from 'src/constants/articleProps';
-import { Text } from 'components/text';
+import type { MouseEventHandler } from 'react';
+import { useRef, useState } from 'react';
+
 import { Spacing } from 'components/spacing';
+import { Text } from 'components/text';
+import type { OptionType } from 'src/constants/articleProps';
 import arrowDown from 'src/images/arrow-down.svg';
-import { Option } from './Option';
+
 import { isFontFamilyClass } from './helpers/isFontFamilyClass';
 import { useEnterSubmit } from './hooks/useEnterSubmit';
 import { useOutsideClickClose } from './hooks/useOutsideClickClose';
-
+import { Option } from './Option';
 import styles from './Select.module.scss';
 
 type SelectProps = {
@@ -27,7 +28,7 @@ export const Select = (props: SelectProps) => {
 	const rootRef = useRef<HTMLDivElement>(null);
 	const placeholderRef = useRef<HTMLDivElement>(null);
 
-	useOutsideClickClose({
+	const optionsRef = useOutsideClickClose<HTMLUListElement>({
 		isOpen,
 		rootRef,
 		onClose,
@@ -40,8 +41,8 @@ export const Select = (props: SelectProps) => {
 	});
 
 	const handleOptionClick = (option: OptionType) => {
-		setIsOpen(false);
 		onChange?.(option);
+		setIsOpen(false);
 	};
 	const handlePlaceHolderClick: MouseEventHandler<HTMLDivElement> = () => {
 		setIsOpen((isOpen) => !isOpen);
@@ -88,7 +89,10 @@ export const Select = (props: SelectProps) => {
 					</Text>
 				</div>
 				{isOpen && (
-					<ul className={styles.select} data-testid='selectDropdown'>
+					<ul
+						className={styles.select}
+						data-testid='selectDropdown'
+						ref={optionsRef}>
 						{options
 							.filter((option) => selected?.value !== option.value)
 							.map((option) => (

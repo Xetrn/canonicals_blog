@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 
 // Сообщаем вебпаку, что этот файл использует это изображение.
-import plane from 'src/images/plane.png';
 import { Spacing } from 'components/spacing';
 import { Text } from 'components/text';
+import plane from 'src/images/plane.png';
 
 import styles from './Article.module.scss';
 
@@ -23,7 +23,7 @@ export const Article = () => {
 			<img className={styles.image} src={plane} alt='Картинка самолета' />
 			<Spacing size={18} />
 			<Text dynamic size={18} fontStyle='italic'>
-				Фото: Hans-Peter Gauster , "Bombardier CSeries CS300 HB-JCA" © 2017 CC
+				Фото: Hans-Peter Gauster , {'Bombardier CSeries CS300 HB-JCA'} © 2017 CC
 				BY-SA 2.0
 			</Text>
 			<Spacing size={72} />
@@ -46,9 +46,9 @@ export const Article = () => {
 			</Text>
 			<Spacing size={30} />
 			<Text dynamic size={18}>
-				С мая 2017 года "Бомбардье" носит имя "Швейцарская Романдия" и
+				С мая 2017 года {'Бомбардье'} носит имя {'Швейцарская Романдия'} и
 				регистрационный номер HB-JCA ; совершает в среднем 4 коммерческих полёта
-				в сутки. Его можно видеть в "Домодедово", а также в аэропортах Парижа,
+				в сутки. Его можно видеть в {'Домодедово'}, а также в аэропортах Парижа,
 				Валенсии, Кракова, Берлина, Вены, Загреба, на Майорке, Крите и Сицилии.
 				Самолёт останется в той же ливрее, пока его не купит другая
 				авиакомпания.

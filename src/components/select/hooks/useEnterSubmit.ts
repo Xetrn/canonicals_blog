@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 type UseEnterSubmit = {
-	onChange: (isOpen: any) => void;
+	onChange: (isOpen: (prevState: boolean) => boolean) => void;
 	placeholderRef: React.RefObject<HTMLDivElement>;
 };
 
