@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { OptionType } from 'src/constants/articleProps';
+import { OptionType } from '../../../constants/articleProps';
 
 type UseEnterSubmit = {
 	onChange?: (option: OptionType) => void;
@@ -22,9 +22,8 @@ export const useEnterSubmit = ({ onChange, option }: UseEnterSubmit) => {
 
 		optionHtml.addEventListener('keydown', handleEnterKeyDown);
 
-		// не забываем удалять листенеры, при размонтировании компонента
 		return () => {
 			optionHtml.removeEventListener('keydown', handleEnterKeyDown);
 		};
-	}, [onChange]);
+	}, [onChange, option]);
 };
