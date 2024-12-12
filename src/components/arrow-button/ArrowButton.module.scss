@@ -10,7 +10,15 @@
   flex-shrink: 0;
   border-right: 1px;
   background-color: #000;
-  transition: transform 0.5s ease;
+  transition: transform 0.5s ease, background-color 0.1s ease;
+}
+
+.container:active {
+  background-color: #787878;
+}
+
+.container:hover {
+  background-color: var(--gold, #ffc802);
 }
 
 .container_open {
