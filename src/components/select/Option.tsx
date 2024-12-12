@@ -39,7 +39,8 @@ export const Option = (props: OptionProps) => {
 			onClick={handleClick(value)}
 			tabIndex={0}
 			data-testid={`select-option-${value}`}
-			ref={optionRef}>
+			ref={optionRef}
+		>
 			<Text family={isFontFamilyClass(className) ? className : undefined}>
 				{title}
 			</Text>
