@@ -1,10 +1,9 @@
 import { useState, useRef } from 'react';
 import type { MouseEventHandler } from 'react';
 import clsx from 'clsx';
-import { OptionType } from 'src/constants/articleProps';
-import { Text } from 'components/text';
-import { Spacing } from 'components/spacing';
-import arrowDown from 'src/images/arrow-down.svg';
+import { OptionType } from '../../constants/articleProps';
+import { Text } from '../../components/text';
+import arrowDown from '../../images/arrow-down.svg';
 import { Option } from './Option';
 import { isFontFamilyClass } from './helpers/isFontFamilyClass';
 import { useEnterSubmit } from './hooks/useEnterSubmit';
@@ -25,7 +24,7 @@ export const Select = (props: SelectProps) => {
 	const { options, placeholder, selected, onChange, onClose, title } = props;
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const rootRef = useRef<HTMLDivElement>(null);
-	const placeholderRef = useRef<HTMLDivElement>(null);
+	const placeholderRef = useRef<HTMLButtonElement>(null);
 
 	useOutsideClickClose({
 		isOpen,
@@ -43,18 +42,18 @@ export const Select = (props: SelectProps) => {
 		setIsOpen(false);
 		onChange?.(option);
 	};
-	const handlePlaceHolderClick: MouseEventHandler<HTMLDivElement> = () => {
+
+	const handlePlaceHolderClick: MouseEventHandler<HTMLButtonElement> = () => {
 		setIsOpen((isOpen) => !isOpen);
 	};
 
 	return (
-		<div>
+		<div className={styles.container}>
 			{title && (
 				<>
 					<Text size={12} weight={800} uppercase>
 						{title}
 					</Text>
-					<Spacing size={4} />
 				</>
 			)}
 			<div
@@ -67,7 +66,7 @@ export const Select = (props: SelectProps) => {
 					alt='иконка стрелочки'
 					className={clsx(styles.arrow, { [styles.arrow_open]: isOpen })}
 				/>
-				<div
+				<button
 					className={clsx(
 						styles.placeholder,
 						styles[selected?.optionClassName || '']
@@ -75,8 +74,8 @@ export const Select = (props: SelectProps) => {
 					data-status={status}
 					data-selected={!!selected?.value}
 					onClick={handlePlaceHolderClick}
-					role='button'
 					tabIndex={0}
+					type='button'
 					ref={placeholderRef}>
 					<Text
 						family={
@@ -86,7 +85,7 @@ export const Select = (props: SelectProps) => {
 						}>
 						{selected?.title || placeholder}
 					</Text>
-				</div>
+				</button>
 				{isOpen && (
 					<ul className={styles.select} data-testid='selectDropdown'>
 						{options
