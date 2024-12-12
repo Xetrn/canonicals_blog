@@ -107,7 +107,7 @@ export const ArticleParamsForm = (props: ArticleParamsFormPropsType) => {
 					/>
 					<Spacing size={50} />
 					<div className={styles.bottomContainer}>
-						<Button title='Сбросить' type='button' onClick={handleReset} />
+						<Button title='Сбросить' type='reset' onClick={handleReset} />
 						<Button title='Применить' type='submit' />
 					</div>
 				</form>
