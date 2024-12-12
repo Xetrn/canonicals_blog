@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 # 3 курс
 # Гусаров Анатолий Владимирович
 
 
 
-=======
->>>>>>> myReadyProject/master
 # SP10_BlogCustomizer
 
 

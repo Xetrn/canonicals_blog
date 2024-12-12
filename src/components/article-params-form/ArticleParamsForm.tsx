@@ -2,22 +2,6 @@ import { ArrowButton } from 'components/arrow-button';
 import { Button } from 'components/button';
 
 import styles from './ArticleParamsForm.module.scss';
-<<<<<<< HEAD
-
-export const ArticleParamsForm = () => {
-	return (
-		<>
-			<ArrowButton />
-			<aside
-				className={styles.container}>
-				<form className={styles.form}>
-					<div className={styles.bottomContainer}>
-						<Button
-							title='Сбросить'
-							type='reset'
-						/>
-						<Button title='Применить' type='submit' />
-=======
 import { SyntheticEvent, useContext, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { Select } from '../select';
@@ -128,7 +112,6 @@ export const ArticleParamsForm = () => {
 					<div className={styles.bottomContainer}>
 						<Button title='Сбросить' type='reset' onClick={setDefaultParams} />
 						<Button title='Применить' type='submit' onClick={applyChanges} />
->>>>>>> myReadyProject/master
 					</div>
 				</form>
 			</aside>
