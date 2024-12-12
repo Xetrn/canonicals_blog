@@ -1,9 +1,9 @@
 import { RefObject, useEffect, useRef } from 'react';
 
 type UseOutsideClickHandler = {
+	containerRef: RefObject<HTMLDivElement>;
 	isVisible: boolean;
 	onClose: () => void;
-	containerRef: RefObject<HTMLDivElement>;
 };
 
 export const useOutsideClickHandler = ({
@@ -16,17 +16,17 @@ export const useOutsideClickHandler = ({
 	useEffect(() => {
 		const handleOutsideClick = () => {
 			if (!isClickInside.current) {
-			if (isVisible) {
-				onClose?.();
-			}
+				if (isVisible) {
+					onClose?.();
+				}
 			} else {
-			isClickInside.current = false;
+				isClickInside.current = false;
 			}
 		};
 	
 		const checkIfClickInside = (event: MouseEvent) => {
 			if (event.target instanceof Node && containerRef.current?.contains(event.target)) {
-			isClickInside.current = true;
+				isClickInside.current = true;
 			}
 		};
 	
@@ -36,7 +36,8 @@ export const useOutsideClickHandler = ({
 			}
 		};
 	
-		containerRef.current?.addEventListener('mousedown', checkIfClickInside);
+		const container = containerRef.current;
+    	container?.addEventListener('mousedown', checkIfClickInside);
 		window.addEventListener('mousedown', handleOutsideClick);
 		window.addEventListener('keydown', handleEscapeKeyPress);
 	
@@ -45,5 +46,5 @@ export const useOutsideClickHandler = ({
 			window.removeEventListener('mousedown', handleOutsideClick);
 			window.removeEventListener('keydown', handleEscapeKeyPress);
 		};
-	}, [isVisible, onClose]);
+	}, [isVisible]);
 };

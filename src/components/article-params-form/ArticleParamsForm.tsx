@@ -1,27 +1,22 @@
-import { FormEvent, useRef, useState } from 'react';
-
 import { ArrowButton } from 'components/arrow-button';
 import { Button } from 'components/button';
-
-import styles from './ArticleParamsForm.module.scss';
-
-import clsx from 'clsx';
-
 import { Text } from '../text';
 import { Select } from '../select';
 import { Separator } from '../separator';
 import { RadioGroup } from '../radio-group';
-
 import {
-	ArticleStateType,
-	backgroundColors,
-	contentWidthArr,
-	defaultArticleState,
-	fontColors,
 	fontFamilyOptions,
 	fontSizeOptions,
+	fontColors,
+	backgroundColors,
+	contentWidthArr,
+	ArticleStateType,
 	OptionType,
+	defaultArticleState,
 } from 'src/constants/articleProps';
+import styles from './ArticleParamsForm.module.scss';
+import { FormEvent, useRef, useState } from 'react';
+import clsx from 'clsx';
 import { useOutsideClickHandler } from './hooks/useOutsideClickClose';
 
 type ArticleParamsFormProps = {
@@ -29,9 +24,8 @@ type ArticleParamsFormProps = {
 };
 
 export const ArticleParamsForm = ({ articleParams }: ArticleParamsFormProps) => {
-	const [isOpen, setIsOpen] = useState(false);
-	const [formParams, setFormParams] =
-		useState<ArticleStateType>(defaultArticleState);
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const [settingsState, setSettingsState] = useState<ArticleStateType>(defaultArticleState);
 
 	const {
 		fontFamilyOption,
@@ -39,88 +33,92 @@ export const ArticleParamsForm = ({ articleParams }: ArticleParamsFormProps) => 
 		backgroundColor,
 		contentWidth,
 		fontSizeOption,
-	} = formParams;
+	} = settingsState;
 
-	const refForm = useRef<HTMLDivElement | null>(null);
+	const formElementRef = useRef<HTMLDivElement | null>(null);
 
-	const handleToggleMenu = () => {
-		setIsOpen((prev) => !prev);
+	const onClick = () => {
+		setIsMenuOpen((prev) => !prev);
 	};
 
-	useOutsideClickHandler({
-		isVisible: isOpen,
-		containerRef: refForm,
-		onClose: handleToggleMenu,
-	});
+	const handleClearForm = (evt: FormEvent) => {
+		evt.preventDefault();
+		setSettingsState(defaultArticleState);
+		articleParams(defaultArticleState);
+	};
 
-	const updateFormParams = (newParams: Partial<ArticleStateType>) => {
-		setFormParams((prevParams) => ({
+	const handleSubmitForm = (evt: FormEvent) => {
+		evt.preventDefault();
+		articleParams(settingsState);
+	};
+
+	const updateFormState = (newParams: Partial<ArticleStateType>) => {
+		setSettingsState((prevParams) => ({
 			...prevParams,
 			...newParams,
 		}));
 	};
 
-	const handleFormReset = (evt: FormEvent) => {
-		evt.preventDefault();
-		setFormParams(defaultArticleState);
-		articleParams(defaultArticleState);
-	};
-
-	const handleFormSubmit = (evt: FormEvent) => {
-		evt.preventDefault();
-		articleParams(formParams);
-		handleToggleMenu();
-	};
+	useOutsideClickHandler({
+		isVisible: isMenuOpen,
+		containerRef: formElementRef,
+		onClose: onClick,
+	});
 
 	return (
-		<div ref={refForm}>
-			<ArrowButton isOpen={isOpen} onClick={handleToggleMenu} />
+		<div ref={formElementRef}>
+			<ArrowButton onClick={onClick} isOpen={isMenuOpen} />
 			<aside
-				className={clsx(styles.container, isOpen ? styles.container_open : '')}>
+				className={clsx(styles.container, isMenuOpen ? styles.container_open : '')}>
 				<form
 					className={styles.form}
-					onReset={handleFormReset}
-					onSubmit={handleFormSubmit}>
+					onReset={handleClearForm}
+					onSubmit={handleSubmitForm}>
 					<Text as='p' size={31} weight={800} uppercase={true}>
 						Задайте параметры
 					</Text>
 					<Select
-						selected={fontFamilyOption}
+						title='Шрифт'
 						options={fontFamilyOptions}
+						selected={fontFamilyOption}
 						onChange={(selected: OptionType) =>
-							updateFormParams({ fontFamilyOption: selected })
-						}
-						title='шрифт'></Select>
+							updateFormState({ fontFamilyOption: selected })
+						} 
+					/>
 					<RadioGroup
-						name='fontSize'
+						title='Размер шрифта'
+						name='font-size'
 						options={fontSizeOptions}
 						selected={fontSizeOption}
 						onChange={(selected: OptionType) =>
-							updateFormParams({ fontSizeOption: selected })
+							updateFormState({ fontSizeOption: selected })
 						}
-						title='размер шрифта'></RadioGroup>
+					/>
 					<Select
-						selected={fontColor}
+						title='Цвет шрифта'
 						options={fontColors}
+						selected={fontColor}
 						onChange={(selected: OptionType) =>
-							updateFormParams({ fontColor: selected })
+							updateFormState({ fontColor: selected })
 						}
-						title='цвет шрифта'></Select>
-					<Separator></Separator>
+					/>
+					<Separator />
 					<Select
-						selected={backgroundColor}
+						title='Цвет фона'
 						options={backgroundColors}
+						selected={backgroundColor}
 						onChange={(selected: OptionType) =>
-							updateFormParams({ backgroundColor: selected })
+							updateFormState({ backgroundColor: selected })
 						}
-						title='цвет фона'></Select>
+					/>
 					<Select
-						selected={contentWidth}
+						title='Ширина контента'
 						options={contentWidthArr}
+						selected={contentWidth}
 						onChange={(selected: OptionType) =>
-							updateFormParams({ contentWidth: selected })
+							updateFormState({ contentWidth: selected })
 						}
-						title='ширина контента'></Select>
+					/>
 					<div className={styles.bottomContainer}>
 						<Button title='Сбросить' type='reset' />
 						<Button title='Применить' type='submit' />
