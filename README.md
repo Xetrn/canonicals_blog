@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 # x курс
 # Фамилия Имя Отчество
 
 
 
+=======
+>>>>>>> myReadyProject/master
 # SP10_BlogCustomizer
 
 

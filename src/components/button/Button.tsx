@@ -1,6 +1,10 @@
 import { Text } from 'components/text';
 
 import styles from './Button.module.scss';
+<<<<<<< HEAD
+=======
+import { SyntheticEvent } from 'react';
+>>>>>>> myReadyProject/master
 
 export const Button = ({
 	title,
@@ -8,7 +12,11 @@ export const Button = ({
 	type,
 }: {
 	title: string;
+<<<<<<< HEAD
 	onClick?: () => void;
+=======
+	onClick?: (e: SyntheticEvent) => void;
+>>>>>>> myReadyProject/master
 	type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
 }) => {
 	return (
