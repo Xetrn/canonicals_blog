@@ -1,10 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, RefObject } from 'react';
 
 type UseOutsideClickClose = {
 	isOpen: boolean;
 	onChange: (newValue: boolean) => void;
 	onClose?: () => void;
-	rootRef: React.RefObject<HTMLDivElement>;
+	rootRef: RefObject<HTMLDivElement>;
 };
 
 export const useOutsideClickClose = ({
@@ -13,8 +13,6 @@ export const useOutsideClickClose = ({
 	onClose,
 	onChange,
 }: UseOutsideClickClose) => {
-	const optionRef = useRef<HTMLDivElement>(null);
-
 	useEffect(() => {
 		const handleClick = (event: MouseEvent) => {
 			const { target } = event;
