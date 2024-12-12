@@ -8,21 +8,26 @@ import { defaultArticleState } from './constants/articleProps';
 
 import './styles/index.scss';
 import styles from './styles/index.module.scss';
+import {
+	ArticleProvider,
+	useArticleContext,
+} from './context/ArticleContext/ArticleContext';
 
 const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
 
 const App = () => {
+	const { params } = useArticleContext();
 	return (
 		<div
 			className={clsx(styles.main)}
 			style={
 				{
-					'--font-family': defaultArticleState.fontFamilyOption.value,
-					'--font-size': defaultArticleState.fontSizeOption.value,
-					'--font-color': defaultArticleState.fontColor.value,
-					'--container-width': defaultArticleState.contentWidth.value,
-					'--bg-color': defaultArticleState.backgroundColor.value,
+					'--font-family': params.fontFamilyOption.value,
+					'--font-size': params.fontSizeOption.value,
+					'--font-color': params.fontColor.value,
+					'--container-width': params.contentWidth.value,
+					'--bg-color': params.backgroundColor.value,
 				} as CSSProperties
 			}>
 			<ArticleParamsForm />
@@ -33,6 +38,8 @@ const App = () => {
 
 root.render(
 	<StrictMode>
-		<App />
+		<ArticleProvider>
+			<App />
+		</ArticleProvider>
 	</StrictMode>
 );

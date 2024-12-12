@@ -2,7 +2,7 @@ import { ArrowButton } from 'components/arrow-button';
 import { Button } from 'components/button';
 
 import styles from './ArticleParamsForm.module.scss';
-import { SyntheticEvent, useEffect, useState } from 'react';
+import { SyntheticEvent, useContext, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { Select } from '../select';
 import {
@@ -19,9 +19,21 @@ import { Text } from '../text';
 import { RadioGroup } from '../radio-group';
 import { Separator } from '../separator';
 import { Spacing } from '../spacing';
+import { useArticleContext } from 'src/context/ArticleContext/ArticleContext';
+
 export const ArticleParamsForm = () => {
 	const [openForm, setOpenForm] = useState(true);
-	const [params, setParams] = useState(defaultArticleState);
+	const { params, setParams } = useArticleContext();
+	const [unsaveParams, setUnsaveParams] = useState(defaultArticleState);
+	const applyChanges = (e: SyntheticEvent) => {
+		e.preventDefault();
+		setParams(unsaveParams);
+	};
+	const setDefaultParams = (e: SyntheticEvent) => {
+		e.preventDefault();
+		setUnsaveParams(defaultArticleState);
+		setParams(defaultArticleState);
+	};
 	const handleClick = () => setOpenForm((prevState) => !prevState);
 	const handleChangeParams = (
 		value: string,
@@ -29,7 +41,8 @@ export const ArticleParamsForm = () => {
 		options: OptionType[]
 	) => {
 		const needObj = options.find((obj) => obj.value === value);
-		setParams({ ...params, [field]: needObj });
+		// setParams({ ...params, [field]: needObj });
+		setUnsaveParams({ ...unsaveParams, [field]: needObj });
 	};
 
 	return (
@@ -46,7 +59,8 @@ export const ArticleParamsForm = () => {
 					<Spacing size={50} />
 					<Select
 						title='Шрифт'
-						selected={params.fontFamilyOption}
+						// selected={params.fontFamilyOption}
+						selected={unsaveParams.fontFamilyOption}
 						options={fontFamilyOptions}
 						onChange={(e) =>
 							handleChangeParams(e.value, 'fontFamilyOption', fontFamilyOptions)
@@ -56,7 +70,8 @@ export const ArticleParamsForm = () => {
 					<RadioGroup
 						name='Размер Шрифта'
 						options={fontSizeOptions}
-						selected={params.fontSizeOption}
+						// selected={params.fontSizeOption}
+						selected={unsaveParams.fontSizeOption}
 						title='Размер Шрифта'
 						onChange={(e) =>
 							handleChangeParams(e.value, 'fontSizeOption', fontSizeOptions)
@@ -65,7 +80,8 @@ export const ArticleParamsForm = () => {
 					<Spacing size={50} />
 					<Select
 						title='Цвет Шрифта'
-						selected={params.fontColor}
+						selected={unsaveParams.fontColor}
+						// selected={params.fontColor}
 						options={fontColors}
 						onChange={(e) =>
 							handleChangeParams(e.value, 'fontColor', fontColors)
@@ -76,7 +92,8 @@ export const ArticleParamsForm = () => {
 					<Spacing size={50} />
 					<Select
 						title='Цвет Фона'
-						selected={params.backgroundColor}
+						selected={unsaveParams.backgroundColor}
+						// selected={params.backgroundColor}
 						options={backgroundColors}
 						onChange={(e) =>
 							handleChangeParams(e.value, 'backgroundColor', backgroundColors)
@@ -85,15 +102,16 @@ export const ArticleParamsForm = () => {
 					<Spacing size={50} />
 					<Select
 						title='Ширина Контента'
-						selected={params.contentWidth}
+						selected={unsaveParams.contentWidth}
+						// selected={params.contentWidth}
 						options={contentWidthArr}
 						onChange={(e) =>
 							handleChangeParams(e.value, 'contentWidth', contentWidthArr)
 						}
 					/>
 					<div className={styles.bottomContainer}>
-						<Button title='Сбросить' type='reset' />
-						<Button title='Применить' type='submit' />
+						<Button title='Сбросить' type='reset' onClick={setDefaultParams} />
+						<Button title='Применить' type='submit' onClick={applyChanges} />
 					</div>
 				</form>
 			</aside>
