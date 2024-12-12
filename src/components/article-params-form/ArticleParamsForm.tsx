@@ -17,7 +17,7 @@ import { Spacing } from '../spacing';
 import { Select } from '../select';
 import { Separator } from '../separator';
 import { RadioGroup } from '../radio-group';
-import { useOutsideClickClose } from '../select/hooks/useOutsideClickClose';
+import { useOutsideClickCloseForm } from './hooks/useOutsideClickCloseForm';
 
 import styles from './ArticleParamsForm.module.scss';
 
@@ -38,11 +38,10 @@ export const ArticleParamsForm = ({
 
 	const toggleForm = () => setIsOpen(!isOpen);
 
-	useOutsideClickClose({
+	useOutsideClickCloseForm({
 		isOpen,
 		rootRef: formRef,
 		onClose: toggleForm,
-		onChange: setIsOpen,
 	});
 
 	const handleSelectChange = (
