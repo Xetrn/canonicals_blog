@@ -2,7 +2,6 @@ import arrow from '../../images/arrow.svg';
 import clsx from 'clsx';
 import styles from './ArrowButton.module.scss';
 
-/** Функция для обработки открытия/закрытия формы */
 export type TArrowButton = {
 	OnClick: () => void;
 	isOpen: boolean;
