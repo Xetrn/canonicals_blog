@@ -9,7 +9,17 @@ module.exports = {
 		react: {
 			version: 'detect',
 		},
+		"import/resolver": {
+			"typescript": {},
+			"node": {
+				"extensions": [".js", ".jsx", ".ts", ".tsx"]
+			}
+		}
 	},
+	"plugins": [
+		"@typescript-eslint",
+		"import"
+	],
 	extends: [
 		'plugin:@typescript-eslint/recommended',
 		'plugin:prettier/recommended',
