@@ -1,10 +1,10 @@
 import { useState, useRef } from 'react';
 import type { MouseEventHandler } from 'react';
 import clsx from 'clsx';
-import { OptionType } from 'src/constants/articleProps';
-import { Text } from 'components/text';
-import { Spacing } from 'components/spacing';
-import arrowDown from 'src/images/arrow-down.svg';
+import { OptionType } from '../../constants/articleProps';
+import { Text } from '../text';
+import { Spacing } from '../spacing';
+import arrowDown from '../../images/arrow-down.svg';
 import { Option } from './Option';
 import { isFontFamilyClass } from './helpers/isFontFamilyClass';
 import { useEnterSubmit } from './hooks/useEnterSubmit';
@@ -62,15 +62,11 @@ export const Select = (props: SelectProps) => {
 				ref={rootRef}
 				data-is-active={isOpen}
 				data-testid='selectWrapper'>
-				<img
-					src={arrowDown}
-					alt='иконка стрелочки'
-					className={clsx(styles.arrow, { [styles.arrow_open]: isOpen })}
-				/>
+				<img src={arrowDown} alt='иконка стрелочки' className={styles.arrow} />
 				<div
 					className={clsx(
 						styles.placeholder,
-						styles[selected?.optionClassName || '']
+						selected && styles[selected.optionClassName as keyof typeof styles]
 					)}
 					data-status={status}
 					data-selected={!!selected?.value}
