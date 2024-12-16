@@ -6,11 +6,7 @@ type UseSideBarClose = {
 	ref: RefObject<HTMLDivElement>;
 };
 
-export const useSideBarClose = ({
-	visible,
-	onClose,
-	ref,
-}: UseSideBarClose) => {
+export const useSideBarClose = ({ visible, onClose, ref }: UseSideBarClose) => {
 	useEffect(() => {
 		window.addEventListener('mousedown', handleClick);
 		window.addEventListener('keydown', handleKeyDown);
